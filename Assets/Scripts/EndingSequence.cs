@@ -130,7 +130,7 @@ public class EndingSequence : MonoBehaviour
         endGroup = Group(above, "Continuara");
         Text((RectTransform)endGroup.transform, "TO BE CONTINUED...", 46, gold, TextAlignmentOptions.Center,
              new Vector4(0, 0, 0, 90), FontStyles.Bold);
-        Text((RectTransform)endGroup.transform, "YAVIGA  ·  THE MISSING DAY\n<size=70%>END OF DEMO</size>", 24, paper,
+        Text((RectTransform)endGroup.transform, "YAVIGA  -  THE MISSING DAY\n<size=70%>END OF DEMO</size>", 24, paper,
              TextAlignmentOptions.Center, new Vector4(0, 120, 0, 0), FontStyles.Normal);
         Text((RectTransform)endGroup.transform, "Press SPACE", 14, new Color32(124, 184, 174, 255),
              TextAlignmentOptions.Bottom, new Vector4(0, 0, 0, 24), FontStyles.Normal);

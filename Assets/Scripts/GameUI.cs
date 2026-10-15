@@ -88,6 +88,7 @@ public class GameUI : MonoBehaviour
     readonly Button[] optionButtons = new Button[3];
     readonly TextMeshProUGUI[] optionLabels = new TextMeshProUGUI[3];
     CanvasGroup bannerGroup, fader;
+    RectTransform bannerRoot, clapStick;
     TextMeshProUGUI bannerBig, bannerSmall;
     Coroutine toastRoutine;
     RectTransform promptBox, toastBox;
@@ -312,12 +313,37 @@ public class GameUI : MonoBehaviour
 
     public IEnumerator Banner(string big, string small, float seconds = 2.2f)
     {
+        // Claqueta de cine: baja desde arriba, "aplaude", espera y se va hacia arriba.
         bannerBig.text = big;
         bannerSmall.text = small;
-        yield return FadeGroup(bannerGroup, 0f, 1f, 0.3f);
+        const float shown = 20f, hidden = 420f;
+        bannerRoot.anchoredPosition = new Vector2(0, hidden);
+        clapStick.localEulerAngles = new Vector3(0, 0, 22f);
+        bannerGroup.alpha = 1f;
+        for (float t = 0f; t < 0.35f; t += Time.unscaledDeltaTime)
+        {
+            float k = t / 0.35f;
+            float back = 1f + 2.2f * Mathf.Pow(k - 1f, 3) + 1.2f * Mathf.Pow(k - 1f, 2);   // baja y rebota tantito
+            bannerRoot.anchoredPosition = new Vector2(0, Mathf.LerpUnclamped(hidden, shown, back));
+            yield return null;
+        }
+        bannerRoot.anchoredPosition = new Vector2(0, shown);
+        for (float t = 0f; t < 0.12f; t += Time.unscaledDeltaTime)
+        {
+            clapStick.localEulerAngles = new Vector3(0, 0, Mathf.Lerp(22f, 0f, t / 0.12f));
+            yield return null;
+        }
+        clapStick.localEulerAngles = Vector3.zero;
+        PlaySfx(typeClip);
         float until = Time.time + seconds;
         while (Time.time < until && !AdvancePressed()) yield return null;
-        yield return FadeGroup(bannerGroup, 1f, 0f, 0.3f);
+        for (float t = 0f; t < 0.3f; t += Time.unscaledDeltaTime)
+        {
+            float k = t / 0.3f;
+            bannerRoot.anchoredPosition = new Vector2(0, Mathf.Lerp(shown, hidden, k * k));
+            yield return null;
+        }
+        bannerGroup.alpha = 0f;
     }
 
     public IEnumerator Fade(float from, float to, float seconds)
@@ -448,21 +474,33 @@ public class GameUI : MonoBehaviour
         questionPanel.SetActive(false);
 
         // Banner grande
-        var bgo = new GameObject("Banner", typeof(RectTransform));
+        // Claqueta de cine (banner grande): tablero con marco pixel art y palo de rayas que "aplaude".
+        var bgo = new GameObject("Claqueta", typeof(RectTransform));
         bgo.transform.SetParent(root, false);
-        var brt = (RectTransform)bgo.transform;
-        brt.anchorMin = new Vector2(0, 0.5f); brt.anchorMax = new Vector2(1, 0.5f);
-        brt.sizeDelta = new Vector2(0, 150); brt.anchoredPosition = new Vector2(0, 40);
-        bgo.AddComponent<Image>().color = new Color32(26, 18, 32, 200);
+        bannerRoot = (RectTransform)bgo.transform;
+        Place(bannerRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 420), new Vector2(580, 222));
         bannerGroup = bgo.AddComponent<CanvasGroup>();
         bannerGroup.alpha = 0f;
         bannerGroup.blocksRaycasts = false;
-        bannerBig = Text(brt, "Grande", 44, TextAlignmentOptions.Center, Vector2.zero);
-        bannerBig.rectTransform.offsetMin = new Vector2(0, 45);
+
+        var board = PixelPanel(bannerRoot, "Tablero", new Vector2(0.5f, 0), new Vector2(0.5f, 0), Vector2.zero, new Vector2(580, 170));
+        var hinge = Box(bannerRoot, "Bisagra", Color.white);
+        Place(hinge, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 168), new Vector2(572, 24));
+        StripeImage(hinge.GetComponent<Image>(), false);
+        clapStick = Box(bannerRoot, "Palo", Color.white);
+        Place(clapStick, new Vector2(0, 0), new Vector2(0, 0), new Vector2(4, 192), new Vector2(572, 24));
+        StripeImage(clapStick.GetComponent<Image>(), true);
+
+        bannerBig = Text(board, "Grande", 40, TextAlignmentOptions.Top, Vector2.zero);
+        bannerBig.rectTransform.offsetMin = new Vector2(20, 0);
+        bannerBig.rectTransform.offsetMax = new Vector2(-20, -22);
         bannerBig.color = borderColor;
         bannerBig.fontStyle = FontStyles.Bold;
-        bannerSmall = Text(brt, "Chico", 20, TextAlignmentOptions.Center, Vector2.zero);
-        bannerSmall.rectTransform.offsetMax = new Vector2(0, -70);
+        var line = Box(board, "Linea", new Color32(122, 90, 36, 255));
+        Place(line, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -74), new Vector2(520, 4));
+        bannerSmall = Text(board, "Chico", 21, TextAlignmentOptions.Top, Vector2.zero);
+        bannerSmall.rectTransform.offsetMin = new Vector2(24, 12);
+        bannerSmall.rectTransform.offsetMax = new Vector2(-24, -88);
 
         // Fundido a negro (encima de todo)
         var fRect = Box(root, "Fundido", Color.black);
@@ -528,9 +566,31 @@ public class GameUI : MonoBehaviour
         return rt;
     }
 
-    static Sprite pixelFrame, pixelKey;
+    static Sprite pixelFrame, pixelKey, pixelStripes;
 
-    static Sprite PixelFrame()
+    // Rayas diagonales de claqueta (negro y crema), repetidas a lo largo.
+    static void StripeImage(Image img, bool stick)
+    {
+        if (pixelStripes == null)
+        {
+            var rows = new string[12];
+            for (int y = 0; y < 12; y++)
+            {
+                var r = new char[16];
+                for (int x = 0; x < 16; x++)
+                    r[x] = (y == 0 || y == 11) ? 'k' : (((x + y) % 16) < 8 ? 'c' : 'k');
+                rows[y] = new string(r);
+            }
+            var tex = PixelTexture(rows);
+            tex.wrapMode = TextureWrapMode.Repeat;
+            pixelStripes = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 50f);
+        }
+        img.sprite = pixelStripes;
+        img.type = Image.Type.Tiled;
+        if (!stick) img.color = new Color(0.85f, 0.85f, 0.85f);
+    }
+
+    public static Sprite PixelFrame()
     {
         if (pixelFrame != null) return pixelFrame;
         string[] rows =

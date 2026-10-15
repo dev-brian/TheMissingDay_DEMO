@@ -34,11 +34,17 @@ public class MainMenu : MonoBehaviour
         var root = mainPanel.transform;
 
         // Título
-        var titleBox = UIKit.Place(new GameObject("Titulo", typeof(RectTransform)).GetComponent<RectTransform>(),
-                                   new Vector2(0.5f, 1f), new Vector2(-130, -110), new Vector2(560, 130));
-        titleBox.SetParent(root, false);
-        var small = UIKit.Text(titleBox, "YAVIGA PRESENTS", 18, UIKit.Teal, TextAlignmentOptions.Top);
-        var title = UIKit.Text(titleBox, "THE MISSING DAY", 58, UIKit.Gold, TextAlignmentOptions.Bottom);
+        // Placa del título con marco pixel art, para que se lea sobre el fondo
+        var titleBox = UIKit.Place(UIKit.Box(root, "Titulo", Color.white), new Vector2(0.5f, 1f), new Vector2(-130, -100), new Vector2(600, 128));
+        var plate = titleBox.GetComponent<Image>();
+        plate.sprite = GameUI.PixelFrame();
+        plate.type = Image.Type.Sliced;
+        var small = UIKit.Text(titleBox, "YAVIGA  PRESENTS", 17, UIKit.Teal, TextAlignmentOptions.Top);
+        small.rectTransform.offsetMax = new Vector2(0, -16);
+        small.characterSpacing = 12;
+        var title = UIKit.Text(titleBox, "THE MISSING DAY", 52, UIKit.Gold, TextAlignmentOptions.Bottom);
+        title.rectTransform.offsetMin = new Vector2(0, 18);
+        title.textWrappingMode = TextWrappingModes.NoWrap;
         title.fontStyle = FontStyles.Bold;
 
         // Enedina
