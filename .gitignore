@@ -115,3 +115,7 @@ InitTestScene*.unity*
 
 # Guías de trabajo diarias (no forman parte del proyecto)
 /0*-*.md
+
+# Escenas de recuperacion automatica de Unity
+/[Aa]ssets/_Recovery/
+/[Aa]ssets/_Recovery.meta

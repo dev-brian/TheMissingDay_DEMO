@@ -12,12 +12,12 @@ public class QuizManager : MonoBehaviour
     public class Challenge
     {
         public string id = "L1_PresentSimple";
-        [TextArea] public string clue = "You find an old note about June 14th...";
-        [TextArea] public string question = "Who _______ about that day?";
-        public string[] options = { "know", "knows", "is knowing" };
+        [TextArea] public string clue = "An old golden necklace... it is not Enedina's.";
+        [TextArea] public string question = "The necklace _______ very old.";
+        public string[] options = { "look", "looks", "is look" };
         public int correctIndex = 1;
-        [TextArea] public string hint = "Use third-person singular (-s): he / she / it / who + verb-s.";
-        [TextArea] public string success = "Correct! \"Who knows about that day?\" You got a new clue.";
+        [TextArea] public string hint = "The necklace = it. In Present Simple, he / she / it + verb-s: looks.";
+        [TextArea] public string success = "Correct! \"The necklace looks very old.\" But... whose necklace is this?";
     }
 
     [Header("Desafíos (se juegan en orden)")]
@@ -97,6 +97,8 @@ public class QuizManager : MonoBehaviour
         attempts++;
         bool correct = index == c.correctIndex;
         MetricsLogger.LogAnswer(c.id, attempts, c.options[index], correct);
+        // Avisa al GameManager (puntos y energía). Devuelve true si Enedina se quedó sin energía.
+        bool tired = GameManager.Instance != null && GameManager.Instance.OnAnswer(correct);
 
         if (correct)
         {
@@ -121,7 +123,17 @@ public class QuizManager : MonoBehaviour
             feedbackText.text = $"Not quite. {c.hint} Try again!";
             Play(wrongClip);
             optionButtons[index].interactable = false;
+            if (tired) RetryChallenge();
         }
+    }
+
+    // Sin energía: se repite solo esta pregunta (no el nivel). Los intentos y el tiempo siguen contando para las métricas.
+    void RetryChallenge()
+    {
+        Challenge c = challenges[current];
+        feedbackText.text = $"Enedina is tired... Let's read the clue again. {c.hint}";
+        for (int i = 0; i < optionButtons.Length && i < c.options.Length; i++) optionButtons[i].interactable = true;
+        optionButtons[0].Select();
     }
 
     IEnumerator NextAfter(float seconds)

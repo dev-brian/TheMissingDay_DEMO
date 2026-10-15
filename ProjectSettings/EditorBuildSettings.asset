@@ -6,8 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: c87be31beb49b6d7fb37834bd1f7f0d7
+  - enabled: 1
+    path: Assets/Scenes/C01_Intro.unity
+    guid: 40c1af2e69aa8aa1294705036c9131e1
+  - enabled: 1
+    path: Assets/Scenes/N1_MiCuarto.unity
+    guid: 24e20a84ce23b86d88ecf0142c1f70fd
+  - enabled: 1
     path: Assets/Scenes/CuartoEnedina.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 0
+    path: Assets/Scenes/Cinematica.unity
+    guid: b6591e48331570bf9b63945cce587206
   m_configObjects:
+    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

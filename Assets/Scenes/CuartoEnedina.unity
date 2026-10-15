@@ -2963,6 +2963,9 @@ MonoBehaviour:
   prompt: {fileID: 902056888}
   quiz: {fileID: 809248659}
   singleUse: 1
+  onSolved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!58 &1984309935
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -3048,7 +3051,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 5
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 44a6964b8cdc5e34f93b4e6dd6ba0eb1, type: 3}
+  m_Sprite: {fileID: -1823782323260261980, guid: 99b7d97a56f23fde19f0a1b34e0efbad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

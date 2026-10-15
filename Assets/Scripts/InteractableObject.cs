@@ -1,9 +1,10 @@
 using UnityEngine;
+using UnityEngine.Events;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
-// Va en el objeto clave (calendario, caja...). Necesita un Collider2D con "Is Trigger" activado.
+// Va en el objeto clave (el collar, la cámara...). Necesita un Collider2D con "Is Trigger" activado.
 // Enedina debe tener el Tag "Player" y un Rigidbody2D + Collider2D.
 public class InteractableObject : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class InteractableObject : MonoBehaviour
     public QuizManager quiz;
     [Tooltip("Si está activo, el objeto ya no se puede usar después de resolver el desafío.")]
     public bool singleUse = true;
+    [Tooltip("Qué pasa al terminar el desafío (por ejemplo, mostrar el panel de fin de demo).")]
+    public UnityEvent onSolved;
 
     bool playerNear;
     bool solved;
@@ -34,6 +37,7 @@ public class InteractableObject : MonoBehaviour
             solved = true;
             if (prompt != null) prompt.SetActive(false);
         }
+        onSolved?.Invoke();
     }
 
     void OnTriggerEnter2D(Collider2D other)
