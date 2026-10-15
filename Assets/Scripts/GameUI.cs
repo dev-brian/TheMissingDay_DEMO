@@ -63,7 +63,7 @@ public class GameUI : MonoBehaviour
     public Color textColor = new Color32(255, 244, 214, 255);
     public Color accentColor = new Color32(124, 184, 174, 255);   // verde azulado de la chamarra
     public Color goodColor = new Color32(138, 184, 90, 255);
-    public Color badColor = new Color32(224, 90, 90, 255);
+    public Color badColor = new Color32(240, 110, 100, 255);
     public Color energyColor = new Color32(238, 138, 58, 255);
 
     public bool Busy => lockCount > 0;
@@ -90,6 +90,7 @@ public class GameUI : MonoBehaviour
     CanvasGroup bannerGroup, fader;
     TextMeshProUGUI bannerBig, bannerSmall;
     Coroutine toastRoutine;
+    RectTransform promptBox, toastBox;
     int chosen = -1;
 
     void Awake()
@@ -159,15 +160,21 @@ public class GameUI : MonoBehaviour
         energyFill.fillAmount = (float)s.Energy / GameSession.MaxEnergy;
     }
 
+    // Letrero con la tecla [E] dibujada. "Press E to interact" se muestra como [E] Interact.
     public void ShowPrompt(string text)
     {
-        promptText.text = text;
-        promptText.gameObject.SetActive(true);
+        string label = text ?? "";
+        if (label.StartsWith("Press E to ")) label = label.Substring(11);
+        if (label.Length > 0) label = char.ToUpper(label[0]) + label.Substring(1);
+        promptText.text = label;
+        float w = promptText.GetPreferredValues(label).x;
+        promptBox.sizeDelta = new Vector2(Mathf.Round(Mathf.Max(120f, w + 64f) / 2f) * 2f, promptBox.sizeDelta.y);
+        promptBox.gameObject.SetActive(true);
     }
 
     public void HidePrompt()
     {
-        promptText.gameObject.SetActive(false);
+        promptBox.gameObject.SetActive(false);
     }
 
     public void Toast(string text, bool good = true)
@@ -180,9 +187,11 @@ public class GameUI : MonoBehaviour
     {
         toastText.text = text;
         toastText.color = good ? goodColor : badColor;
-        toastText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1.8f);
-        toastText.gameObject.SetActive(false);
+        float w = toastText.GetPreferredValues(text).x;
+        toastBox.sizeDelta = new Vector2(Mathf.Min(800f, w + 40f), toastBox.sizeDelta.y);
+        toastBox.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2.2f);
+        toastBox.gameObject.SetActive(false);
     }
 
     public void PlaySfx(AudioClip clip)
@@ -378,17 +387,23 @@ public class GameUI : MonoBehaviour
         counterText.color = accentColor;
 
         // Letrero de interacción
-        promptText = Text(root, "Prompt", 18, TextAlignmentOptions.Center, Vector2.zero);
-        Place(promptText.rectTransform, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 150), new Vector2(500, 30));
-        promptText.text = "Press E";
+        promptBox = PixelPanel(root, "Prompt", new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 150), new Vector2(200, 44));
+        var key = Box(promptBox, "TeclaE", Color.white);
+        Place(key, new Vector2(0, 0.5f), new Vector2(0, 0.5f), new Vector2(10, 1), new Vector2(28, 32));
+        key.GetComponent<Image>().sprite = PixelKey();
+        promptText = Text(promptBox, "Texto", 18, TextAlignmentOptions.MidlineLeft, Vector2.zero);
+        promptText.rectTransform.offsetMin = new Vector2(48, 0);
+        promptText.rectTransform.offsetMax = new Vector2(-10, 0);
         promptText.fontStyle = FontStyles.Bold;
-        promptText.gameObject.SetActive(false);
+        promptText.textWrappingMode = TextWrappingModes.NoWrap;
+        promptBox.gameObject.SetActive(false);
 
-        // Aviso corto
-        toastText = Text(root, "Aviso", 22, TextAlignmentOptions.Center, Vector2.zero);
-        Place(toastText.rectTransform, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -80), new Vector2(700, 40));
+        // Aviso corto (en caja oscura para que se lea sobre cualquier fondo)
+        toastBox = PixelPanel(root, "Aviso", new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -70), new Vector2(400, 44));
+        toastText = Text(toastBox, "Texto", 20, TextAlignmentOptions.Center, new Vector2(14, 0));
         toastText.fontStyle = FontStyles.Bold;
-        toastText.gameObject.SetActive(false);
+        toastText.textWrappingMode = TextWrappingModes.NoWrap;
+        toastBox.gameObject.SetActive(false);
 
         // Caja de diálogo
         var dlg = Panel(root, "Dialogo", new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 16), new Vector2(760, 120));
@@ -498,6 +513,98 @@ public class GameUI : MonoBehaviour
         rt.anchorMin = Vector2.zero; rt.anchorMax = Vector2.one;
         rt.offsetMin = margin; rt.offsetMax = -margin;
         return t;
+    }
+
+    // ---------- Piezas en pixel art (se dibujan por código, no hay que importar nada) ----------
+
+    // Panel con marco dorado de pixel art que se estira sin deformar el borde (9-slice).
+    RectTransform PixelPanel(Transform parent, string name, Vector2 anchor, Vector2 pivot, Vector2 pos, Vector2 size)
+    {
+        var rt = Box(parent, name, Color.white);
+        Place(rt, anchor, pivot, pos, size);
+        var img = rt.GetComponent<Image>();
+        img.sprite = PixelFrame();
+        img.type = Image.Type.Sliced;
+        return rt;
+    }
+
+    static Sprite pixelFrame, pixelKey;
+
+    static Sprite PixelFrame()
+    {
+        if (pixelFrame != null) return pixelFrame;
+        string[] rows =
+        {
+            ".kkkkkkk.",
+            "kgggggggk",
+            "kgGGGGGgk",
+            "kgGfffGgk",
+            "kgGfffGgk",
+            "kgGfffGgk",
+            "kgGGGGGgk",
+            "kgggggggk",
+            ".kkkkkkk.",
+        };
+        var tex = PixelTexture(rows);
+        // 50 pixeles por unidad = cada pixel del dibujo mide 2 puntos de la interfaz (igual que el juego a 480x270).
+        pixelFrame = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 50f, 0,
+                                   SpriteMeshType.FullRect, new Vector4(3, 3, 3, 3));
+        return pixelFrame;
+    }
+
+    // Tecla "E" de teclado en pixel art.
+    static Sprite PixelKey()
+    {
+        if (pixelKey != null) return pixelKey;
+        string[] rows =
+        {
+            ".kkkkkkkkkkkk.",
+            "kcccccccccccck",
+            "kccckkkkkkccck",
+            "kccckkkkkkccck",
+            "kccckkccccccck",
+            "kccckkccccccck",
+            "kccckkkkkcccck",
+            "kccckkkkkcccck",
+            "kccckkccccccck",
+            "kccckkccccccck",
+            "kccckkkkkkccck",
+            "kccckkkkkkccck",
+            "kcccccccccccck",
+            "kssssssssssssk",
+            "kssssssssssssk",
+            ".kkkkkkkkkkkk.",
+        };
+        var tex = PixelTexture(rows);
+        pixelKey = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), 50f);
+        return pixelKey;
+    }
+
+    static Texture2D PixelTexture(string[] rows)
+    {
+        int h = rows.Length, w = rows[0].Length;
+        var tex = new Texture2D(w, h, TextureFormat.RGBA32, false);
+        tex.filterMode = FilterMode.Point;
+        tex.wrapMode = TextureWrapMode.Clamp;
+        for (int y = 0; y < h; y++)
+            for (int x = 0; x < w; x++)
+                tex.SetPixel(x, h - 1 - y, PixelColor(rows[y][x]));
+        tex.Apply();
+        return tex;
+    }
+
+    static Color32 PixelColor(char c)
+    {
+        switch (c)
+        {
+            case 'k': return new Color32(26, 18, 32, 255);      // contorno oscuro
+            case 'g': return new Color32(201, 162, 77, 255);    // dorado
+            case 'G': return new Color32(122, 90, 36, 255);     // dorado oscuro
+            case 'f': return new Color32(38, 28, 46, 240);      // relleno
+            case 'c': return new Color32(255, 244, 214, 255);   // crema (tecla)
+            case 's': return new Color32(201, 162, 77, 255);    // lado de la tecla
+            default: return new Color32(0, 0, 0, 0);
+        }
     }
 
     static Sprite whiteSprite;

@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/N2_SalaAbuela.unity
     guid: 0c2c4fd7ac4114fcfb83a22b69e4e832
+  - enabled: 1
+    path: Assets/Scenes/N3_EstudioAbuela.unity
+    guid: 8f16a8ac96d1915eba4d7a3304d3b98c
   - enabled: 0
     path: Assets/Scenes/Cinematica.unity
     guid: b6591e48331570bf9b63945cce587206
