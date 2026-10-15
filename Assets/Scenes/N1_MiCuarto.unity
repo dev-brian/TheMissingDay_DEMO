@@ -267,6 +267,8 @@ GameObject:
   m_Component:
   - component: {fileID: 249669033}
   - component: {fileID: 249669032}
+  - component: {fileID: 249669035}
+  - component: {fileID: 249669034}
   m_Layer: 0
   m_Name: CajaCollar
   m_TagString: Untagged
@@ -348,6 +350,93 @@ Transform:
   m_Children: []
   m_Father: {fileID: 683033982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &249669034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249669031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4b0cb400eb719a58cab3f04897fbe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Clue
+  preset: 4
+  clueName: The Camera
+  description: Enedina's camera. She uses it to make videos.
+  countsAsClue: 1
+  points: 10
+  speaker: ENEDINA
+  before: []
+  after:
+  - This is my camera.
+  - I use it to make videos.
+  hasQuestion: 1
+  question:
+    id: N1_Pregunta
+    instruction: 'Complete the sentence:'
+    text: Enedina _____ movies.
+    options:
+    - love
+    - loves
+    - loving
+    correct: 1
+    feedbackCorrect: Correct! Enedina loves movies.
+    feedbackWrong: Try again! Remember the third-person singular rule.
+  nextObjective: 
+  hideWhenDone: 0
+  lookBack: 0
+  promptText: Press E to interact
+  onDone:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!61 &249669035
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249669031}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.5, y: 2}
+  m_EdgeRadius: 0
 --- !u!1 &283383392
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,6 +447,8 @@ GameObject:
   m_Component:
   - component: {fileID: 283383394}
   - component: {fileID: 283383393}
+  - component: {fileID: 283383396}
+  - component: {fileID: 283383395}
   m_Layer: 3
   m_Name: Camara
   m_TagString: Untagged
@@ -439,6 +530,93 @@ Transform:
   m_Children: []
   m_Father: {fileID: 683033982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &283383395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283383392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4b0cb400eb719a58cab3f04897fbe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Clue
+  preset: 3
+  clueName: The Camera
+  description: Enedina's camera. She uses it to make videos.
+  countsAsClue: 1
+  points: 10
+  speaker: ENEDINA
+  before: []
+  after:
+  - This is my camera.
+  - I use it to make videos.
+  hasQuestion: 1
+  question:
+    id: N1_Pregunta
+    instruction: 'Complete the sentence:'
+    text: Enedina _____ movies.
+    options:
+    - love
+    - loves
+    - loving
+    correct: 1
+    feedbackCorrect: Correct! Enedina loves movies.
+    feedbackWrong: Try again! Remember the third-person singular rule.
+  nextObjective: 
+  hideWhenDone: 0
+  lookBack: 0
+  promptText: Press E to interact
+  onDone:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!61 &283383396
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 283383392}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2.5, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &549617898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1292,6 +1470,8 @@ Transform:
   - {fileID: 901290058}
   - {fileID: 1769696659}
   - {fileID: 283383394}
+  - {fileID: 951557205}
+  - {fileID: 1083257553}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &737743160
@@ -1431,6 +1611,68 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 683033982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &759067157
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 759067159}
+  - component: {fileID: 759067158}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &759067158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759067157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e580d956c45c9d0c98ce77302b83d7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  preset: 0
+  levelNumber: LEVEL 1
+  levelTitle: MY DREAM
+  mission: Explore your room.
+  introLines:
+  - I love movies.
+  - One day, I want to make my own movies.
+  counterLabel: Clues
+  totalClues: 3
+  completeLines:
+  - I want to make my own movies.
+  - This is my dream.
+  achievementName: Dreamer
+  achievementText: You found your three movie treasures!
+  afterObjective: Go to the door.
+  onCompleted:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!4 &759067159
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759067157}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.2293, y: -3.06524, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &867463986
 GameObject:
@@ -1650,6 +1892,8 @@ GameObject:
   m_Component:
   - component: {fileID: 901290058}
   - component: {fileID: 901290057}
+  - component: {fileID: 901290060}
+  - component: {fileID: 901290059}
   m_Layer: 0
   m_Name: PosterMyOwnStory
   m_TagString: Untagged
@@ -1731,6 +1975,93 @@ Transform:
   m_Children: []
   m_Father: {fileID: 683033982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &901290059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901290056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4b0cb400eb719a58cab3f04897fbe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Clue
+  preset: 2
+  clueName: The Camera
+  description: Enedina's camera. She uses it to make videos.
+  countsAsClue: 1
+  points: 10
+  speaker: ENEDINA
+  before: []
+  after:
+  - This is my camera.
+  - I use it to make videos.
+  hasQuestion: 1
+  question:
+    id: N1_Pregunta
+    instruction: 'Complete the sentence:'
+    text: Enedina _____ movies.
+    options:
+    - love
+    - loves
+    - loving
+    correct: 1
+    feedbackCorrect: Correct! Enedina loves movies.
+    feedbackWrong: Try again! Remember the third-person singular rule.
+  nextObjective: 
+  hideWhenDone: 0
+  lookBack: 0
+  promptText: Press E to interact
+  onDone:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!61 &901290060
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901290056}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: -2.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 2, y: 3}
+    newSize: {x: 2, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 2, y: 8}
+  m_EdgeRadius: 0
 --- !u!1 &920616827
 GameObject:
   m_ObjectHideFlags: 0
@@ -1869,6 +2200,126 @@ Transform:
   m_Children: []
   m_Father: {fileID: 683033982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &951557204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 951557205}
+  - component: {fileID: 951557207}
+  - component: {fileID: 951557206}
+  m_Layer: 0
+  m_Name: Escritorio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &951557205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951557204}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: -4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 683033982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &951557206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951557204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4b0cb400eb719a58cab3f04897fbe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Clue
+  preset: 1
+  clueName: The Camera
+  description: Enedina's camera. She uses it to make videos.
+  countsAsClue: 1
+  points: 10
+  speaker: ENEDINA
+  before: []
+  after:
+  - This is my camera.
+  - I use it to make videos.
+  hasQuestion: 1
+  question:
+    id: N1_Pregunta
+    instruction: 'Complete the sentence:'
+    text: Enedina _____ movies.
+    options:
+    - love
+    - loves
+    - loving
+    correct: 1
+    feedbackCorrect: Correct! Enedina loves movies.
+    feedbackWrong: Try again! Remember the third-person singular rule.
+  nextObjective: 
+  hideWhenDone: 0
+  lookBack: 0
+  promptText: Press E to interact
+  onDone:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!61 &951557207
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 951557204}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 3, y: 2}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &1073385247
 GameObject:
   m_ObjectHideFlags: 0
@@ -2031,6 +2482,100 @@ MonoBehaviour:
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
+--- !u!1 &1083257552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1083257553}
+  - component: {fileID: 1083257555}
+  - component: {fileID: 1083257554}
+  m_Layer: 0
+  m_Name: Puerta
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1083257553
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083257552}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.25, y: -3.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 683033982}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1083257554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083257552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa2446c9db3c7bbada4ac64264f583d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelDoor
+  nextScene: N2_SalaAbuela
+  needsLevelComplete: 1
+  lockedMessage: I need to find all the clues first.
+--- !u!61 &1083257555
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083257552}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.5, y: 4}
+  m_EdgeRadius: 0
 --- !u!1 &1172759335
 GameObject:
   m_ObjectHideFlags: 0
@@ -11227,6 +11772,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2137655516}
   - component: {fileID: 2137655515}
+  - component: {fileID: 2137655518}
+  - component: {fileID: 2137655517}
   m_Layer: 0
   m_Name: Chocolate
   m_TagString: Untagged
@@ -11308,6 +11855,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 683033982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2137655517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137655514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 810165f98e6335ea086226e94125d93b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnergyPickup
+  energy: 1
+  points: 5
+  message: Hot chocolate! +1 Energy
+--- !u!61 &2137655518
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2137655514}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -11317,3 +11925,4 @@ SceneRoots:
   - {fileID: 549617900}
   - {fileID: 683033982}
   - {fileID: 2006348690}
+  - {fileID: 759067159}
