@@ -478,29 +478,36 @@ public class GameUI : MonoBehaviour
         var bgo = new GameObject("Claqueta", typeof(RectTransform));
         bgo.transform.SetParent(root, false);
         bannerRoot = (RectTransform)bgo.transform;
-        Place(bannerRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 420), new Vector2(580, 222));
+        Place(bannerRoot, new Vector2(0.5f, 0.5f), new Vector2(0.5f, 0.5f), new Vector2(0, 420), new Vector2(580, 242));
         bannerGroup = bgo.AddComponent<CanvasGroup>();
         bannerGroup.alpha = 0f;
         bannerGroup.blocksRaycasts = false;
 
-        var board = PixelPanel(bannerRoot, "Tablero", new Vector2(0.5f, 0), new Vector2(0.5f, 0), Vector2.zero, new Vector2(580, 170));
+        var board = PixelPanel(bannerRoot, "Tablero", new Vector2(0.5f, 0), new Vector2(0.5f, 0), Vector2.zero, new Vector2(580, 190));
         var hinge = Box(bannerRoot, "Bisagra", Color.white);
-        Place(hinge, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 168), new Vector2(572, 24));
+        Place(hinge, new Vector2(0.5f, 0), new Vector2(0.5f, 0), new Vector2(0, 188), new Vector2(572, 24));
         StripeImage(hinge.GetComponent<Image>(), false);
         clapStick = Box(bannerRoot, "Palo", Color.white);
-        Place(clapStick, new Vector2(0, 0), new Vector2(0, 0), new Vector2(4, 192), new Vector2(572, 24));
+        Place(clapStick, new Vector2(0, 0), new Vector2(0, 0), new Vector2(4, 212), new Vector2(572, 24));
         StripeImage(clapStick.GetComponent<Image>(), true);
 
         bannerBig = Text(board, "Grande", 40, TextAlignmentOptions.Top, Vector2.zero);
         bannerBig.rectTransform.offsetMin = new Vector2(20, 0);
-        bannerBig.rectTransform.offsetMax = new Vector2(-20, -22);
+        bannerBig.rectTransform.offsetMax = new Vector2(-20, -24);
+        bannerBig.textWrappingMode = TextWrappingModes.NoWrap;   // nunca se parte en dos renglones
+        bannerBig.enableAutoSizing = true;                       // si es largo, se encoge para caber
+        bannerBig.fontSizeMin = 24; bannerBig.fontSizeMax = 40;
+        bannerBig.overflowMode = TextOverflowModes.Overflow;
         bannerBig.color = borderColor;
         bannerBig.fontStyle = FontStyles.Bold;
         var line = Box(board, "Linea", new Color32(122, 90, 36, 255));
-        Place(line, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -74), new Vector2(520, 4));
+        Place(line, new Vector2(0.5f, 1), new Vector2(0.5f, 1), new Vector2(0, -84), new Vector2(520, 4));
         bannerSmall = Text(board, "Chico", 21, TextAlignmentOptions.Top, Vector2.zero);
-        bannerSmall.rectTransform.offsetMin = new Vector2(24, 12);
-        bannerSmall.rectTransform.offsetMax = new Vector2(-24, -88);
+        bannerSmall.rectTransform.offsetMin = new Vector2(24, 14);
+        bannerSmall.rectTransform.offsetMax = new Vector2(-24, -100);
+        bannerSmall.lineSpacing = 12;                            // separa "Dreamer" de su descripción
+        bannerSmall.enableAutoSizing = true;
+        bannerSmall.fontSizeMin = 14; bannerSmall.fontSizeMax = 21;
 
         // Fundido a negro (encima de todo)
         var fRect = Box(root, "Fundido", Color.black);
