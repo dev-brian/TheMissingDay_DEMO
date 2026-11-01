@@ -98,7 +98,11 @@ public class Clue : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         near = true;
-        if (!Done) GameUI.I.ShowPrompt(promptText);
+        if (!Done)
+        {
+            GameUI.I.ShowPrompt(promptText);
+            GameUI.I.PlayNear();   // sonido al acercarse
+        }
     }
 
     void OnTriggerExit2D(Collider2D other)

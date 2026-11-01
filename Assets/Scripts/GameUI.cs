@@ -56,6 +56,8 @@ public class GameUI : MonoBehaviour
     public AudioClip wrongClip;
     public AudioClip pickupClip;
     public AudioClip typeClip;
+    [Tooltip("Suena al acercarse a un objeto. Si lo dejas vacío, se carga solo desde Assets/Resources/Audio/near (.wav u .ogg).")]
+    public AudioClip nearClip;
 
     [Header("Colores (paleta del juego)")]
     public Color panelColor = new Color32(26, 18, 32, 230);
@@ -100,6 +102,7 @@ public class GameUI : MonoBehaviour
         instance = this;
         if (font == null) font = TMP_Settings.defaultFontAsset;
         sfx = gameObject.AddComponent<AudioSource>();
+        if (nearClip == null) nearClip = Resources.Load<AudioClip>("Audio/near");   // Assets/Resources/Audio/near.wav
         EnsureEventSystem();
         Build();
         session = GameSession.I;
@@ -201,6 +204,7 @@ public class GameUI : MonoBehaviour
     }
 
     public void PlayPickup() => PlaySfx(pickupClip);
+    public void PlayNear() => PlaySfx(nearClip);
 
     // ---------- Diálogos ----------
 
