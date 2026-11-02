@@ -35,6 +35,8 @@ public class GameUI : MonoBehaviour
     }
 
     static GameUI instance;
+    // Devuelve el GameUI que ya existe SIN crear uno nuevo (null si no hay). Úsalo al salir de triggers/OnDestroy.
+    public static GameUI Current => instance;
     public static GameUI I
     {
         get

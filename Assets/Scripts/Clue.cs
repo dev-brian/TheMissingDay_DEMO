@@ -109,6 +109,7 @@ public class Clue : MonoBehaviour
     {
         if (!other.CompareTag("Player")) return;
         near = false;
-        GameUI.I.HidePrompt();
+        // Al cerrar la escena este trigger se dispara cuando GameUI ya fue destruido; GameUI.I crearía otro de la nada.
+        if (GameUI.Current != null) GameUI.Current.HidePrompt();
     }
 }
