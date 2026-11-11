@@ -78,9 +78,13 @@ public class LevelManager : MonoBehaviour
         ui.Lock();
         yield return new WaitForSeconds(0.3f);
         yield return ui.ShowLines("ENEDINA", completeLines);
+        MusicPlayer.Stinger("mission");     // fanfarria sincronizada con el compás de la música
         yield return ui.Banner("MISSION COMPLETED", levelTitle);
         if (GameSession.I.UnlockAchievement(achievementName))
+        {
+            MusicPlayer.Stinger("logro");
             yield return ui.Banner("ACHIEVEMENT UNLOCKED!", achievementName + "\n<size=80%>" + achievementText + "</size>");
+        }
         ui.SetObjective(afterObjective);
         ui.Unlock();
         onCompleted?.Invoke();
